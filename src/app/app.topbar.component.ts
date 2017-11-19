@@ -9,14 +9,15 @@ import {AppComponent} from './app.component';
                 <div class="logo"></div>
             </div>
 
-            <div class="topbar-right">
+            <div class="topbar-right" style="margin-right:15px;">
+            
                 <a id="menu-button" href="#" (click)="app.onMenuButtonClick($event)">
                     <i></i>
                 </a>
-
+<!--
                 <a id="rightpanel-menu-button" href="#" (click)="app.onRightPanelButtonClick($event)">
                     <i class="material-icons">more_vert</i>
-                </a>
+                </a> -->
 
                 <a id="topbar-menu-button" href="#" (click)="app.onTopbarMenuButtonClick($event)">
                     <i class="material-icons">menu</i>
@@ -25,12 +26,14 @@ import {AppComponent} from './app.component';
                 <ul class="topbar-items animated fadeInDown" [ngClass]="{'topbar-items-visible': app.topbarMenuActive}">
                     <li #profile class="profile-item" *ngIf="app.profileMode==='top'||app.isHorizontal()"
                         [ngClass]="{'active-top-menu':app.activeTopbarItem === profile}">
-
+                        
                         <a href="#" (click)="app.onTopbarItemClick($event,profile)">
-                            <img class="profile-image" src="assets/layout/images/avatar.png" />
-                            <span class="topbar-item-name">Jane Williams</span>
+                        <div  style="color:#1ab394;font-weight:bold">Profile &#x7c; Logout</div>
+                        
+                        <!-- <img class="profile-image" src="assets/layout/images/h1.png"/> -->
                         </a>
-
+                        
+                       
                         <ul class="ultima-menu animated fadeInDown">
                             <li role="menuitem">
                                 <a href="#">
@@ -38,18 +41,21 @@ import {AppComponent} from './app.component';
                                     <span>Profile</span>
                                 </a>
                             </li>
+                            <!-- REMOVING PRIVACY FROM TOP BAR
                             <li role="menuitem">
                                 <a href="#">
                                     <i class="material-icons">security</i>
                                     <span>Privacy</span>
                                 </a>
                             </li>
+                            
+                          
                             <li role="menuitem">
                                 <a href="#">
                                     <i class="material-icons">settings_applications</i>
                                     <span>Settings</span>
                                 </a>
-                            </li>
+                            </li> -->
                             <li role="menuitem">
                                 <a href="#">
                                     <i class="material-icons">power_settings_new</i>
@@ -58,6 +64,7 @@ import {AppComponent} from './app.component';
                             </li>
                         </ul>
                     </li>
+                    <!--
                     <li #settings [ngClass]="{'active-top-menu':app.activeTopbarItem === settings}">
                         <a href="#" (click)="app.onTopbarItemClick($event,settings)">
                             <i class="topbar-icon material-icons">settings</i>
@@ -89,7 +96,8 @@ import {AppComponent} from './app.component';
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li>  -->
+                    <!--
                     <li #messages [ngClass]="{'active-top-menu':app.activeTopbarItem === messages}">
                         <a href="#" (click)="app.onTopbarItemClick($event,messages)">
                             <i class="topbar-icon material-icons animated swing">message</i>
@@ -128,7 +136,8 @@ import {AppComponent} from './app.component';
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li>  -->
+                    <!--
                     <li #notifications [ngClass]="{'active-top-menu':app.activeTopbarItem === notifications}">
                         <a href="#" (click)="app.onTopbarItemClick($event,notifications)">
                             <i class="topbar-icon material-icons">timer</i>
@@ -161,7 +170,8 @@ import {AppComponent} from './app.component';
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
+                    <!--
                     <li #search class="search-item" [ngClass]="{'active-top-menu':app.activeTopbarItem === search}"
                         (click)="app.onTopbarItemClick($event,search)">
                         <span class="md-inputfield">
@@ -169,9 +179,9 @@ import {AppComponent} from './app.component';
                             <label>Search</label>
                             <i class="topbar-icon material-icons">search</i>
                         </span>
-                    </li>
+                    </li> -->
                 </ul>
-            </div>
+            </div> 
         </div>
     `
 })

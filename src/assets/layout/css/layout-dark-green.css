@@ -212,7 +212,7 @@
     opacity: 0;
     transform: scale(2.5); } }
 .splash-screen {
-  background-color: #3F51B5;
+  background-color: #2E4352;
   height: 100%;
   width: 100%;
   position: fixed; }
@@ -226,7 +226,7 @@
     vertical-align: middle;
     width: 200px;
     height: 30px;
-    background: url("../images/logo2x.png") top left no-repeat;
+     background: url("../images/devOps.png") top left no-repeat;
     background-size: 200px 30px; }
   .splash-screen .load-bar {
     position: relative;
@@ -633,7 +633,7 @@
       vertical-align: middle;
       width: 200px;
       height: 30px;
-      background: url("../images/logo.png") top left no-repeat; }
+      background: url("../images/devOps.png") top left no-repeat; }
     .landing-wrapper #header .header-top #menu {
       float: right;
       list-style: none;
@@ -901,7 +901,7 @@
       padding: 0; } }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .landing-wrapper .header .header-top .logo {
-    background: url("../images/logo2x.png") top left no-repeat;
+    background: url("../images/devOps.png") top left no-repeat;
     background-size: 200px 30px; } }
 html {
   height: 100%; }
@@ -944,7 +944,7 @@ body {
     vertical-align: middle;
     width: 200px;
     height: 30px;
-    background: url("../images/logo2x.png") top left no-repeat;
+    background: url("../images/devOps.png") top left no-repeat;
     background-size: 200px 30px; }
   .layout-container .topbar .topbar-left {
     box-sizing: border-box;
@@ -1394,7 +1394,7 @@ body {
         position: relative;
         display: block; }
         .layout-container .topbar-items > li > a .topbar-item-name {
-          display: none; }
+          display: inline; color: #fff; }
         .layout-container .topbar-items > li > a .topbar-badge {
           position: absolute;
           right: -5px;
