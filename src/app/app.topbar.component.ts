@@ -27,11 +27,15 @@ import {AppComponent} from './app.component';
                     <li #profile class="profile-item" *ngIf="app.profileMode==='top'||app.isHorizontal()"
                         [ngClass]="{'active-top-menu':app.activeTopbarItem === profile}">
                         
-                        <a href="#" (click)="app.onTopbarItemClick($event,profile)">
+                        <button type="button" pButton label={{user}}
+                        icon="ui-icon-person" 
+                        (click)="app.onTopbarItemClick($event,profile)"></button>
+
+                        <!-- <a href="#" (click)="app.onTopbarItemClick($event,profile)">
                         <div  style="color:#1ab394;font-weight:bold">Profile &#x7c; Logout</div>
                         
-                        <!-- <img class="profile-image" src="assets/layout/images/h1.png"/> -->
-                        </a>
+                        <img class="profile-image" src="assets/layout/images/h1.png"/> 
+                        </a> -->
                         
                        
                         <ul class="ultima-menu animated fadeInDown">
@@ -186,6 +190,8 @@ import {AppComponent} from './app.component';
     `
 })
 export class AppTopbarComponent {
+   
+    user: string = "MikeRapuano";
 
     constructor(public app: AppComponent) {}
 
