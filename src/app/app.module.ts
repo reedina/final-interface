@@ -98,6 +98,7 @@ import {CarService} from './demo/service/carservice';
 import {CountryService} from './demo/service/countryservice';
 import {EventService} from './demo/service/eventservice';
 import {NodeService} from './demo/service/nodeservice';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
     imports: [
@@ -192,7 +193,8 @@ import {NodeService} from './demo/service/nodeservice';
         EmptyDemoComponent,
         FileDemoComponent,
         UtilsDemoComponent,
-        DocumentationComponent
+        DocumentationComponent,
+        DashboardComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
