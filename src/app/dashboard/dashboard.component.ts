@@ -42,13 +42,13 @@ export class DashboardComponent implements OnInit {
                       label: 'Azure Costs',
                       backgroundColor: '#03A9F4',
                       borderColor: '#03A9F4',
-                      data: [35000, 47000, 50000, 51000, 56000, 65000, 70000]
+                      data: [51000, 47000, 50000, 51000, 56000, 65000, 70000]
                   },
                   {
                       label: 'AWS Costs',
                       backgroundColor: '#FFC107',
                       borderColor: '#FFC107',
-                      data: [38000, 48000, 40000, 48000, 56000, 47000, 60000]
+                      data: [48000, 49000, 44000, 48000, 56000, 47000, 60000]
                   }
               ]
           };
