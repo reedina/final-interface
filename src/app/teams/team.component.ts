@@ -17,7 +17,7 @@ const MAX_EXAMPLE_RECORDS = 1000;
 })
 export class TeamComponent implements OnInit {
 
-    teams: Array<any>;
+    teams: Array<ITeam>;
   
   @ViewChild("dt") dt : DataTable;
   
@@ -179,8 +179,10 @@ export class TeamComponent implements OnInit {
       ];
   
       this.teamService.getTeams().
-      do( res => console.log(res[0].name)).
-      subscribe( res => { this.teams = res;})
+      do(res => console.log(res)).
+      subscribe( res => { this.teams = res;});
+ 
+     
   
     }
   
