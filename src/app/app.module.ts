@@ -99,6 +99,7 @@ import {CountryService} from './demo/service/countryservice';
 import {EventService} from './demo/service/eventservice';
 import {NodeService} from './demo/service/nodeservice';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { TeamComponent } from './teams/team.component';
 
 @NgModule({
     imports: [
@@ -194,7 +195,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
         FileDemoComponent,
         UtilsDemoComponent,
         DocumentationComponent,
-        DashboardComponent
+        DashboardComponent,
+        TeamComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
