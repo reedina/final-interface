@@ -100,6 +100,7 @@ import {EventService} from './demo/service/eventservice';
 import {NodeService} from './demo/service/nodeservice';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TeamComponent } from './teams/team.component';
+import { TeamService } from './teams/team.service';
 
 @NgModule({
     imports: [
@@ -196,11 +197,12 @@ import { TeamComponent } from './teams/team.component';
         UtilsDemoComponent,
         DocumentationComponent,
         DashboardComponent,
-        TeamComponent
+        TeamComponent,
+
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        CarService, CountryService, EventService, NodeService
+        CarService, CountryService, EventService, NodeService, TeamService
     ],
     bootstrap: [AppComponent]
 })
