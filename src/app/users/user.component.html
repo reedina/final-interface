@@ -1,0 +1,29 @@
+<div class="alltimesheets ui-g">
+  
+  
+    <div class="header ui-g-12">
+  
+      <h2>
+        All Users
+      </h2>
+    
+  
+    </div>
+  <p-dataTable #dt [value]="users" class="ui-g-12" sortField="last_name" sortOrder="1" emptyMessage="No teams found"
+  [reorderableColumns]="true" columnResizeMode="fit" [resizableColumns]="false" [globalFilter]="tableSearch" exportFilename="teams"
+   [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,15,20,25]" [pageLinks]="8"  [responsive]="true">
+
+      <p-column field="id" header="Id"></p-column> 
+      <p-column field="first_name" header="First Name" [sortable]="true" ></p-column>
+      <p-column field="last_name" header="Last Name" [sortable]="true" ></p-column>
+      <p-column field="email" header="Email" [sortable]="true" ></p-column>
+      <p-column field="team.name" header="Team Name" [sortable]="true" ></p-column>
+      <p-footer>
+          <label for="tableSearch">Search: </label>
+          <input id="tableSearch" #tableSearch type="text" placeholder="Search All Fields">
+          <button type="button" pButton icon="ui-icon-save" label="Export" (click)="dt.exportCSV()" style="float:right;"></button>
+          
+        </p-footer>
+
+  </p-dataTable>
+</div>

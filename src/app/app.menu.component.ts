@@ -20,7 +20,22 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {label: 'Dashboard', icon: 'dashboard', routerLink: ['/']},
-            {label: 'Teams', icon: 'people', routerLink: ['/teams']},
+            
+            {
+                label: 'Assign Resource', icon: 'person',
+                items: [
+                    {label: 'Users', icon: 'person', routerLink: ['/users']},   
+                    {label: 'Teams', icon: 'people', routerLink: ['/teams']},  
+                    {label: 'Projects', icon: 'work', routerLink: ['/projects']}                                                   
+                ]
+            },       
+            {
+                label: 'Create Resource', icon: 'cloud_queue',
+                items: [
+                    {label: 'Environments', icon: 'computer', routerLink: ['/environments']}   
+                ]
+            },                 
+/*
             {
                 label: 'Themes', icon: 'palette', badge: '6',
                 items: [
@@ -38,6 +53,8 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Grey - Deep Orange', icon: 'brush', command: (event) => {this.changeTheme('grey'); }}
                 ]
             },
+*/
+/*
             {
                 label: 'Customization', icon: 'settings_application',
                 items: [
@@ -53,6 +70,7 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Top Profile', icon: 'person_pin',  command: () => this.app.profileMode = 'top'},
                 ]
             },
+*/            
             {
                 label: 'Components', icon: 'list', badge: '2', badgeStyleClass: 'teal-badge',
                 items: [
@@ -79,6 +97,7 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Access Denied Page', icon: 'security', url: 'assets/pages/access.html', target: '_blank'}
                 ]
             },
+/*            
             {
                 label: 'Menu Hierarchy', icon: 'menu',
                 items: [
@@ -124,6 +143,7 @@ export class AppMenuComponent implements OnInit {
                     }
                 ]
             },
+*/            
             {label: 'Utils', icon: 'build', routerLink: ['/utils']},
             {label: 'Documentation', icon: 'find_in_page', routerLink: ['/documentation']}
         ];

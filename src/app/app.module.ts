@@ -101,6 +101,12 @@ import {NodeService} from './demo/service/nodeservice';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TeamComponent } from './teams/team.component';
 import { TeamService } from './teams/team.service';
+import { UserComponent } from './users/user.component';
+import { UserService } from './users/user.service';
+import { ProjectComponent } from './projects/project.component';
+import { ProjectService } from './projects/project.service';
+import { EnvironmentComponent } from './environments/environment.component';
+import { EnvironmentService } from './environments/environment.service';
 
 @NgModule({
     imports: [
@@ -198,11 +204,14 @@ import { TeamService } from './teams/team.service';
         DocumentationComponent,
         DashboardComponent,
         TeamComponent,
+        UserComponent,
+        ProjectComponent,
+        EnvironmentComponent,
 
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        CarService, CountryService, EventService, NodeService, TeamService
+        CarService, CountryService, EventService, NodeService, TeamService, UserService, ProjectService, EnvironmentService
     ],
     bootstrap: [AppComponent]
 })

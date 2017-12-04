@@ -3,6 +3,9 @@ import {ModuleWithProviders} from '@angular/core';
 import {DashboardDemoComponent} from './demo/view/dashboarddemo.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {TeamComponent} from './teams/team.component';
+import { UserComponent} from './users/user.component';
+import { ProjectComponent} from './projects/project.component';
+import { EnvironmentComponent} from './environments/environment.component';
 import {SampleDemoComponent} from './demo/view/sampledemo.component';
 import {FormsDemoComponent} from './demo/view/formsdemo.component';
 import {DataDemoComponent} from './demo/view/datademo.component';
@@ -20,7 +23,10 @@ import {DocumentationComponent} from './demo/view/documentation.component';
 export const routes: Routes = [
     {path: '', component: DashboardComponent},
     {path: 'mydash', component: DashboardComponent},  
-    {path: 'teams', component: TeamComponent},       
+    {path: 'teams', component: TeamComponent},  
+    {path: 'users', component: UserComponent }, 
+    {path: 'projects', component: ProjectComponent },
+    {path: 'environments', component: EnvironmentComponent },                     
     {path: 'sample', component: SampleDemoComponent},
     {path: 'forms', component: FormsDemoComponent},
     {path: 'data', component: DataDemoComponent},
