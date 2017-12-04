@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuItem, DataTable, LazyLoadEvent } from "primeng/primeng";
+
+import {Observable} from 'rxjs/Rx';
+import { EnvironmentService } from './environment.service';
+import { IEnvironment } from './environment';
 
 @Component({
   selector: 'app-environment',
@@ -7,9 +12,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EnvironmentComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  environments: Array<IEnvironment>;
+  
+    constructor(private environmentService: EnvironmentService) { }
+  
+    ngOnInit() {
+  
+      this.environmentService.getEnvironments().
+       do(res => console.log(res)).
+       subscribe( res => { this.environments = res });
+  
+    }
 
 }

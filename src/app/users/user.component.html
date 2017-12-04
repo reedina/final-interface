@@ -9,8 +9,8 @@
     
   
     </div>
-  <p-dataTable #dt [value]="users" class="ui-g-12" sortField="last_name" sortOrder="1" emptyMessage="No teams found"
-  [reorderableColumns]="true" columnResizeMode="fit" [resizableColumns]="false" [globalFilter]="tableSearch" exportFilename="teams"
+  <p-dataTable #dt [value]="users" class="ui-g-12" sortField="last_name" sortOrder="1" emptyMessage="No users found"
+  [reorderableColumns]="true" columnResizeMode="fit" [resizableColumns]="false" [globalFilter]="tableSearch" exportFilename="users"
    [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,15,20,25]" [pageLinks]="8"  [responsive]="true">
 
       <p-column field="id" header="Id"></p-column> 
