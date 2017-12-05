@@ -45,11 +45,11 @@ export class TeamComponent implements OnInit {
 
     save(): void {
       if (this.teamForm.dirty && this.teamForm.valid) {
-        console.log('Saved: ' + JSON.stringify(this.teamForm.value))
+        console.log('Attempting to Save: ' + JSON.stringify(this.teamForm.value))
         let t = Object.assign({}, this.team, this.teamForm.value);
         this.teamService.saveTeam(t)
           .subscribe(
-             (r) => {console.log(`saved the form officially: ${r.name}`);
+             (r) => {console.log(`Successfully Saved Form: ${r.name}`);
                      this.resp = r.name;
                      this.updateTeams();
                      this.teamForm.reset();
@@ -59,7 +59,8 @@ export class TeamComponent implements OnInit {
 
           );
       }  else {
-          console.log("FORM NOT DIRTY and VALID")
+          // Remember, you only save a "valid" form
+          console.log("Form not dirty and valid")
       }
   
   }
@@ -75,13 +76,14 @@ showSuccess(name: string) {
 }
 
 truncate(string){
-  if (string.length > 10)
-     return string.substring(0,10)+'...';
-  else
-     return string;
+    if (string.length > 10)
+       return string.substring(0,10)+'...';
+    else
+       return string;
 }
 
 onReset() {
-  this.teamForm.reset();
+    this.teamForm.reset();
 }
+
 }
