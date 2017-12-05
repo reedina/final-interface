@@ -32,8 +32,9 @@
              <div  class="ui-g-12" > 
                 <at-fielderrors [form]="teamForm" field="name" nicename="Name"> </at-fielderrors>
              </div>
-            
         </div>
+
+   <!-- Submit/Reset Button -->        
        <div>
         <button pButton type="submit" [disabled]="!teamForm.valid" label="Save" icon="ui-icon-save"></button>     
         <span style="float:right;"><button (click)="onReset()" pButton type="reset" [disabled]="!teamForm.dirty" label="Clear" icon="ui-icon-clear"></button> </span>

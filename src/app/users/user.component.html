@@ -1,15 +1,13 @@
 <div class="alltimesheets ui-g">
   
-  
     <div class="header ui-g-12">
-  
       <h2>
-        All Users
+        Manage Users
       </h2>
-    
-  
     </div>
-  <p-dataTable #dt [value]="users" class="ui-g-12" sortField="last_name" sortOrder="1" emptyMessage="No users found"
+
+  <!-- Data Table -->    
+  <p-dataTable #dt [value]="users" class="ui-g-12 ui-lg-8" sortField="last_name" sortOrder="1" emptyMessage="No users found"
   [reorderableColumns]="true" columnResizeMode="fit" [resizableColumns]="false" [globalFilter]="tableSearch" exportFilename="users"
    [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,15,20,25]" [pageLinks]="8"  [responsive]="true">
 
@@ -26,4 +24,44 @@
         </p-footer>
 
   </p-dataTable>
+<!-- Panel for Form -->
+<p-panel header="Add User" class="ui-g-12 ui-lg-4">
+  <form [formGroup]="userForm" (ngSubmit)="save()">
+
+    <!-- Input First Name -->
+    <div class="ui-g">
+         <label for="FirstNameID" class="ui-g-12 ui-lg-2">First Name</label>
+         <input type="text" pInputText id="FirstNameID" formControlName="first_name" placeholder="John"  class="ui-g-12 ui-lg-10">
+         <div  class="ui-g-12" > 
+            <at-fielderrors [form]="userForm" field="first_name" nicename="First Name"> </at-fielderrors>
+         </div>
+    </div>
+
+    <!-- Input Last Name -->
+    <div class="ui-g">
+      <label for="LastNameID" class="ui-g-12 ui-lg-2">Last Name</label>
+      <input type="text" pInputText id="LastNameID" formControlName="last_name" placeholder="Doe"  class="ui-g-12 ui-lg-10">
+      <div  class="ui-g-12" > 
+         <at-fielderrors [form]="userForm" field="last_name" nicename="Last Name"> </at-fielderrors>
+      </div>
+    </div>
+    
+    <!-- Input Email -->
+    <div class="ui-g">
+      <label for="EmailID" class="ui-g-12 ui-lg-2">Email</label>
+      <input type="text" pInputText id="EmailID" formControlName="email" placeholder="john.doe@mydomain.com"  class="ui-g-12 ui-lg-10">
+      <div  class="ui-g-12" > 
+         <at-fielderrors [form]="userForm" field="email" nicename="Email"> </at-fielderrors>
+      </div>
+    </div>    
+
+   <!-- Submit/Reset Button -->
+   <div>
+    <button pButton type="submit" [disabled]="!userForm.valid" label="Save" icon="ui-icon-save"></button>     
+    <span style="float:right;"><button (click)="onReset()" pButton type="reset" [disabled]="!userForm.dirty" label="Clear" icon="ui-icon-clear"></button> </span>
+    </div>
+                  
+    </form>
+ </p-panel>
+ <p-growl [value]="msgs" life="5000"></p-growl>   
 </div>
