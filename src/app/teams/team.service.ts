@@ -20,5 +20,32 @@ result: Array<any>;
         return this.http.get('http://localhost:4040/api/teams')
         .map(result => this.result  = result.json())
   }
+  
+  saveTeam(team: ITeam): Observable<ITeam> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
 
+    return this.createTeam(team, options);
+  }
+
+  private createTeam(team: ITeam, options: RequestOptions): Observable<ITeam> {
+    console.log(team)
+      return this.http.post("http://localhost:4040/api/team", team, options)
+      .map(this.extractData)
+      .do(data => console.log('createProduct: ' + JSON.stringify(data)))
+      .catch(this.handleError);
+    }
+
+    private extractData(response: Response) {
+      let body = response.json();
+      return body || {};
+    }
+    
+    private handleError(error: Response): Observable<any> {
+      // in a real world app, we may send the server to some remote logging infrastructure
+      // instead of just logging it to the console
+      console.error(error);
+      return Observable.throw(error.json().error || 'Server error');
+    }
+    
 }

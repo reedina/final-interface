@@ -107,6 +107,8 @@ import { ProjectComponent } from './projects/project.component';
 import { ProjectService } from './projects/project.service';
 import { EnvironmentComponent } from './environments/environment.component';
 import { EnvironmentService } from './environments/environment.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FielderrorsComponent } from './fielderrors/fielderrors.component';
 
 @NgModule({
     imports: [
@@ -179,7 +181,8 @@ import { EnvironmentService } from './environments/environment.service';
         ToolbarModule,
         TooltipModule,
         TreeModule,
-        TreeTableModule
+        TreeTableModule,
+        ReactiveFormsModule        
     ],
     declarations: [
         AppComponent,
@@ -207,6 +210,7 @@ import { EnvironmentService } from './environments/environment.service';
         UserComponent,
         ProjectComponent,
         EnvironmentComponent,
+        FielderrorsComponent,
 
     ],
     providers: [

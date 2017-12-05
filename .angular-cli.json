@@ -25,6 +25,7 @@
           "../node_modules/nanoscroller/bin/css/nanoscroller.css",
           "./assets/layout/css/layout-dark-green.css",          
           "./assets/theme/theme-dark-green.css",
+          "../node_modules/font-awesome/css/font-awesome.min.css",          
         "styles.scss"
       ],
       "scripts": [

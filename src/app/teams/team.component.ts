@@ -1,13 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from "@angular/forms";
 import { MenuItem, DataTable, LazyLoadEvent } from "primeng/primeng";
-import Dexie from 'dexie';
-//import {Observable} from 'rxjs/Observable';
-//import {Observable } from 'rxjs/Observable';
 import {Observable} from 'rxjs/Rx';
 import { TeamService } from './team.service';
-import { ITeam} from './team';
-
-const MAX_EXAMPLE_RECORDS = 1000;
+import { ITeam, Team } from './team';
+import {Message} from 'primeng/primeng';
 
 
 @Component({
@@ -17,198 +14,74 @@ const MAX_EXAMPLE_RECORDS = 1000;
 })
 export class TeamComponent implements OnInit {
 
+    msgs: Message[] = [];
+    teamForm: FormGroup;
+    team: Team = new Team();
     teams: Array<ITeam>;
+    resp: any;
   
   @ViewChild("dt") dt : DataTable;
   
-    db: Dexie;
-  
-    allTimesheetData = [
-  
-      { user: 'Glen', project: 'Payroll App', category: 'Backend', startTime: 1000, endTime: 1700, date: 1434243 },
-      { user: 'Karen', project: 'Agile Times', category: 'Frontend', startTime: 900, endTime: 1700, date: 1434243 },
-      { user: 'Si', project: 'Mobile App', category: 'Operations', startTime: 1100, endTime: 1700, date: 1434243 },
-      { user: 'Rohit', project: 'Agile Times', category: 'Backend', startTime: 800, endTime: 1700, date: 1434243 },
-  
-    ];
-  
-    allProjectNames = ['', 'Payroll App', 'Mobile App', 'Agile Times'];
-  
-    allProjects = this.allProjectNames.map((proj) => {
-      return { label: proj, value: proj }
-    });
-  
-    selectedRows: Array<any>;
-  
-    contextMenu: MenuItem[];
-  
-    recordCount : number;
-  
-    constructor(private teamService: TeamService) {
-      // for (let x = 0; x < 5; x++) {
-      //   this.allTimesheetData = this.allTimesheetData.concat(this.allTimesheetData);
-      // }
-      this.recordCount = this.allTimesheetData.length;
-  
-      this.configureDatabase();
-      this.populateDatabase();
-  
+
+    constructor(private fb: FormBuilder, private teamService: TeamService) {
+      this.teamForm = this.fb.group({
+        name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]]
+        });
     }
-  
-    private configureDatabase() {
-  
-      this.db = new Dexie('AgileTimes');
-  
-      // Define a schema
-      this.db.version(1).stores({
-        timesheet: 'id,user,project,category,startTime,endTime,date'
-      });
-  
-    }
-  
-     private populateDatabase() {
-  
-      this.getRecordCount().then((count) => {
-        this.recordCount = count;
-        if (!count) {
-          this.resetDatabase();
-        }
-      });
-  
-    }
-  
-    generateRandomUser(id: number) {
-  
-      var names = ["Joe", "Mary", "Phil", "Karen", "Si", "Tim", "Rohit", "Jenny", "Kim", "Greg", "Danni"]
-      var allProjectNames = ['Payroll App', 'Mobile App', 'Agile Times'];
-      var allCategories = ['Frontend', 'Backend', 'Operations'];
-  
-      let newUser = {
-        id: id,
-        user: names[id % names.length],
-        project: allProjectNames[id % allProjectNames.length],
-        category: allCategories[id % allCategories.length],
-        startTime: Math.round(Math.random() * 1000),
-        endTime: Math.round(Math.random() * 1000),
-        date: Math.round(Math.random() * 100000)
-      };
-      newUser.endTime += newUser.startTime; // to make sure it's later
-  
-      return newUser;
-  
-    }
-  
-    getRecordCount(): Dexie.Promise<number> {
-      return this.db.table("timesheet").count();
-    }
-  
-     resetDatabase() {
-  
-      let that = this;
-  
-      this.dt.loading = true;
-  
-      this.db.table("timesheet").clear().then(() => {
-        console.log("Database Cleared");
-        Observable.range(0, MAX_EXAMPLE_RECORDS).do(
-          function (id) {
-            let randomUser = that.generateRandomUser(id);
-            that.db.table("timesheet").add(randomUser);
-            if (id % 100 == 0) {
-              that.getRecordCount().then((count) => {
-                that.recordCount = count;
-              })
-            }
-  
-          },
-          function (err) {
-            console.log("Do Error: %s", err);
-          },
-          function () {
-            console.log("Do complete");
-            that.dt.loading = false;
-            that.dt.reset();
-          }).subscribe(() => {
-            console.log("Finished Reset database");
-            that.getRecordCount().then((count) => {
-              that.recordCount = count;
-            })
-          });
-      })
-    }
-  
-    loadTimes(event: LazyLoadEvent) {
-  
-      console.log(JSON.stringify(event));
-  
-      let table = this.db.table("timesheet");
-  
-      var query: any;
-  
-      // Dexie doesn't support ordering AND filtering, so we branch here
-      // Alternative strategies here: https://github.com/dfahlander/Dexie.js/issues/297
-      if (event.filters && event.filters["project"]) {
-        query = table.where("project").equals(event.filters["project"]["value"]);
-      } else if (event.globalFilter) {
-        query = table.where("project").startsWithIgnoreCase(event.globalFilter)
-          .or("user").startsWithIgnoreCase(event.globalFilter)
-          .or("category").startsWithIgnoreCase(event.globalFilter);
-      } else {
-        query = table.orderBy(event.sortField);
-      }
-  
-      query = query
-        .offset(event.first)
-        .limit(event.rows);
-  
-      if (event.sortOrder == -1) {
-        query = query.reverse();
-      };
-  
-      query.toArray((nextBlockOfTimes) => {
-        // console.log("Loaded times: %s", JSON.stringify(nextBlockOfTimes));
-        this.allTimesheetData = nextBlockOfTimes;
-      });
-    }
-  
-  
+
+ 
     ngOnInit() {
-      this.contextMenu = [
-        { label: 'Debug', icon: 'fa-bug', command: (event) => this.onDebug(this.selectedRows) },
-        { label: 'Delete', icon: 'fa-close', command: (event) => this.onDelete(this.selectedRows) }
-      ];
   
       this.teamService.getTeams().
       do(res => console.log(res)).
       subscribe( res => { this.teams = res;});
- 
-     
-  
     }
-  
-    onDebug(selectedRows: any) {
-      console.log(JSON.stringify(selectedRows));
-    }
-  
-    onDelete(selectedRows: any) {
-      this.allTimesheetData = this.allTimesheetData.filter((row) => {
-        return !selectedRows.includes(row);
-      });
-    }
-  
-  
-  
-    onEditComplete(editInfo) {
-      let fieldChanged = editInfo.column.field;
-      let newRowValues = editInfo.data;
-      alert(`You edited ${fieldChanged} to ${newRowValues[fieldChanged]}`);
-      console.log(`You edited ${fieldChanged} to ${newRowValues[fieldChanged]}   ${newRowValues.user}`);
-    }
-  
-    onRowSelect(rowInfo) {
-      console.log(JSON.stringify(rowInfo.data)); // or this.selectedRow
-    }
-  
-  
 
+    updateTeams() {
+      this.teamService.getTeams().
+      do(res => console.log(res)).
+      subscribe( res => { this.teams = res;});
+    }
+
+    save(): void {
+      if (this.teamForm.dirty && this.teamForm.valid) {
+        console.log('Saved: ' + JSON.stringify(this.teamForm.value))
+        let t = Object.assign({}, this.team, this.teamForm.value);
+        this.teamService.saveTeam(t)
+          .subscribe(
+             (r) => {console.log(`saved the form officially: ${r.name}`);
+                     this.resp = r.name;
+                     this.updateTeams();
+                     this.teamForm.reset();
+                     this.showSuccess(r.name);
+           },
+               (e) => {  this.teamForm.reset(); this.showError(e);}
+
+          );
+      }  else {
+          console.log("FORM NOT DIRTY and VALID")
+      }
+  
+  }
+  
+  showError(message: string) {
+    this.msgs = [];
+    this.msgs.push({severity: 'error', summary: 'Error Message', detail: message});
+}
+
+showSuccess(name: string) {
+    this.msgs = [];
+    this.msgs.push({severity: 'success', summary: 'Success', detail: `Added ${this.truncate(name)}`});
+}
+
+truncate(string){
+  if (string.length > 10)
+     return string.substring(0,10)+'...';
+  else
+     return string;
+}
+
+onReset() {
+  this.teamForm.reset();
+}
 }

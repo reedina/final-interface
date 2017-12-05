@@ -1,15 +1,13 @@
 <div class="alltimesheets ui-g">
   
-  
-    <div class="header ui-g-12">
-  
+  <div class="header ui-g-12">
       <h2>
-        All Teams
+        Manage Teams
       </h2>
-    
-  
-    </div>
-  <p-dataTable #dt [value]="teams" class="ui-g-12" sortField="name" sortOrder="1" emptyMessage="No teams found"
+  </div>
+
+   <!-- Data Table -->
+  <p-dataTable #dt [value]="teams" class="ui-g-12 ui-lg-8"  sortField="name" sortOrder="1" emptyMessage="No teams found"
   [reorderableColumns]="true" columnResizeMode="fit" [resizableColumns]="false" [globalFilter]="tableSearch" exportFilename="teams"
    [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,15,20,25]" [pageLinks]="8"  [responsive]="true">
       <p-column field="id" header="Id"></p-column> 
@@ -22,41 +20,28 @@
         </p-footer>
 
   </p-dataTable>
-  <!--
-    
-    <p-dataTable #dt [value]="allTimesheetData" class="ui-g-12" sortField="startTime" sortOrder="1" emptyMessage="No time entries found"
-      [reorderableColumns]="true" columnResizeMode="fit" [resizableColumns]="true" [globalFilter]="tableSearch" exportFilename="users"
-      [editable]="true" (onEditComplete)="onEditComplete($event)" [(selection)]="selectedRows" (onRowSelect)="onRowSelect($event)"
-      [contextMenu]="tableContextMenu" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5,10,15,20]" [totalRecords]="recordCount"
-      [pageLinks]="8" [lazy]="true" (onLazyLoad)="loadTimes($event)">
-  
-      <p-column selectionMode="multiple" styleClass="selectBoxColumn"></p-column>
-  
-      <p-column field="user" header="User" [editable]="true"></p-column>
-      <p-column field="project" header="Project" [filter]="true" filterPlaceholder="Type a Project" filterMatchMode="equals" [style]="{'overflow':'visible'}"
-        [editable]="true">
-        <ng-template pTemplate="filter" let-col>
-          <p-dropdown [options]="allProjects" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
-            styleClass="ui-column-filter"></p-dropdown>
-        </ng-template>
-        <ng-template let-col let-project="rowData" pTemplate="editor">
-          <p-dropdown [(ngModel)]="project[col.field]" [options]="allProjects" [autoWidth]="false" [style]="{'width':'100%'}" required="true"></p-dropdown>
-        </ng-template>
-  
-      </p-column>
-      <p-column field="category" header="Category" [sortable]="true"></p-column>
-      <p-column field="startTime" header="Start Time" [sortable]="true"></p-column>
-      <p-column field="endTime" header="End Time"></p-column>
-      <p-footer>
-        <label for="tableSearch">Search: </label>
-        <input id="tableSearch" #tableSearch type="text" placeholder="Search All The Things">
-        <button type="button" pButton icon="fa-table" label="Export" (click)="dt.exportCSV()" style="float:right;"></button>
-      </p-footer>
-    </p-dataTable>
-  
-    <p-contextMenu #tableContextMenu [model]="contextMenu"></p-contextMenu>
-  -->
- 
-  </div>
-  
-  
+
+  <!-- Panel for Form -->
+  <p-panel header="Add Team" class="ui-g-12 ui-lg-4">
+      <form [formGroup]="teamForm" (ngSubmit)="save()">
+
+        <!-- Input Name -->
+        <div class="ui-g">
+             <label for="Team" class="ui-g-12 ui-lg-2">Team</label>
+             <input type="text" pInputText id="team" formControlName="name" placeholder="Name"  class="ui-g-12 ui-lg-10">
+             <div  class="ui-g-12" > 
+                <at-fielderrors [form]="teamForm" field="name" nicename="Name"> </at-fielderrors>
+             </div>
+            
+        </div>
+       <div>
+        <button pButton type="submit" [disabled]="!teamForm.valid" label="Save" icon="ui-icon-save"></button>     
+        <span style="float:right;"><button (click)="onReset()" pButton type="reset" [disabled]="!teamForm.dirty" label="Clear" icon="ui-icon-clear"></button> </span>
+        </div>
+                      
+        </form>
+     </p-panel>
+     <p-growl [value]="msgs" life="5000"></p-growl>   
+</div>
+
+   
