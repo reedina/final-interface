@@ -7,7 +7,7 @@
     </div>
 
   <!-- Data Table -->    
-  <p-dataTable #dt [value]="environmentInstances" class="ui-g-12 ui-lg-12" sortField="name" sortOrder="1" emptyMessage="No instances found"
+  <p-dataTable #dt [value]="environmentInstances" class="ui-g-12 ui-lg-8" sortField="name" sortOrder="1" emptyMessage="No instances found"
   [reorderableColumns]="true" columnResizeMode="fit" [resizableColumns]="false" [globalFilter]="tableSearch" exportFilename="env_instances"
    [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,15,20,25]" [pageLinks]="8"  [responsive]="true">
 
@@ -25,8 +25,43 @@
 
   </p-dataTable>
 
-  <!-- 
-    form goes here
+<!-- Panel for Form -->
+<p-panel header="Build Environment" class="ui-g-12 ui-lg-4">
+  <form [formGroup]="environmentInstanceForm" (ngSubmit)="save()">
 
-  -->
+    <!-- Input Name -->
+    <div class="ui-g">
+         <label for="NameID" class="ui-g-12 ui-lg-2">Name</label>
+         <input type="text" pInputText id="NameID" formControlName="name" placeholder="My Instance"  class="ui-g-12 ui-lg-10">
+         <div  class="ui-g-12" > 
+            <at-fielderrors [form]="environmentInstanceForm" field="name" nicename="Name"> </at-fielderrors>
+         </div>
+    </div>
+
+    <!-- Input Deletion Time -->
+    <div class="ui-g">
+      <label for="DeletionTimeID" class="ui-g-12 ui-lg-2">Deletion Time</label>
+      <p-calendar [showIcon]="true" id="deletionTimeID" showTime="true" formControlName="deletion_time" dateFormat="mm/dd/yy" class="ui-g-12 ui-lg-10" [minDate]="minDeleteDate"></p-calendar>
+      <!--<input type="text" pInputText id="DeletionTimeID" formControlName="deletion_time" placeholder="Doe"  class="ui-g-12 ui-lg-10"> -->
+      <div  class="ui-g-12" > 
+         <at-fielderrors [form]="environmentInstanceForm" field="deletion_time" nicename="Deletion Time"> </at-fielderrors>
+      </div>
+    </div>
+    
+
+    <!-- Select Team -->
+    <div class="ui-g">
+      <label for="EnvironmentID" class="ui-g-12 ui-lg-2">Environment</label>
+      <p-dropdown  autoWidth="true"  [style]="{'width': '100%'}" id="EnvironmentID" formControlName="environment" [options]="environmentsDd"  class="ui-g-12 ui-lg-10"></p-dropdown>
+    </div>    
+
+   <!-- Submit/Reset Button -->
+   <div>
+    <button pButton type="submit" [disabled]="!environmentInstanceForm.valid" label="Save" icon="ui-icon-save"></button>     
+    <span style="float:right;"><button (click)="onReset()" pButton type="reset" [disabled]="!environmentInstanceForm.dirty" label="Clear" icon="ui-icon-clear"></button> </span>
+    </div>
+                  
+    </form>
+ </p-panel>
+ <p-growl [value]="msgs" life="5000"></p-growl>  
   </div>
