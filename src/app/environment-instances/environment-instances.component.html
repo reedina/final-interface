@@ -1,0 +1,32 @@
+<div class="alltimesheets ui-g">
+  
+    <div class="header ui-g-12">
+      <h2>
+        Environment Instances
+      </h2>
+    </div>
+
+  <!-- Data Table -->    
+  <p-dataTable #dt [value]="environmentInstances" class="ui-g-12 ui-lg-12" sortField="name" sortOrder="1" emptyMessage="No instances found"
+  [reorderableColumns]="true" columnResizeMode="fit" [resizableColumns]="false" [globalFilter]="tableSearch" exportFilename="env_instances"
+   [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,15,20,25]" [pageLinks]="8"  [responsive]="true">
+
+      <p-column field="id" header="Id"></p-column> 
+      <p-column field="name" header="Name" [sortable]="true" ></p-column>
+      <p-column field="deletion_time" header="Deletion Time" [sortable]="true" ></p-column>
+      <p-column field="environment.name" header="Environment Name" [sortable]="true" ></p-column>
+      <p-column field="environment.type" header="Environment Type" [sortable]="true" ></p-column>
+      <p-footer>
+          <label for="tableSearch">Search: </label>
+          <input id="tableSearch" #tableSearch type="text" placeholder="Search All Fields">
+          <button type="button" pButton icon="ui-icon-save" label="Export" (click)="dt.exportCSV()" style="float:right;"></button>
+          
+        </p-footer>
+
+  </p-dataTable>
+
+  <!-- 
+    form goes here
+
+  -->
+  </div>

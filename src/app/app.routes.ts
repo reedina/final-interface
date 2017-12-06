@@ -6,6 +6,7 @@ import {TeamComponent} from './teams/team.component';
 import { UserComponent} from './users/user.component';
 import { ProjectComponent} from './projects/project.component';
 import { EnvironmentComponent} from './environments/environment.component';
+import { EnvironmentInstancesComponent } from './environment-instances/environment-instances.component';
 import {SampleDemoComponent} from './demo/view/sampledemo.component';
 import {FormsDemoComponent} from './demo/view/formsdemo.component';
 import {DataDemoComponent} from './demo/view/datademo.component';
@@ -26,7 +27,8 @@ export const routes: Routes = [
     {path: 'teams', component: TeamComponent},  
     {path: 'users', component: UserComponent }, 
     {path: 'projects', component: ProjectComponent },
-    {path: 'environments', component: EnvironmentComponent },                     
+    {path: 'environments', component: EnvironmentComponent },   
+    {path: 'envinstances', component: EnvironmentInstancesComponent },                        
     {path: 'sample', component: SampleDemoComponent},
     {path: 'forms', component: FormsDemoComponent},
     {path: 'data', component: DataDemoComponent},

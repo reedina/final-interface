@@ -22,17 +22,18 @@ export class AppMenuComponent implements OnInit {
             {label: 'Dashboard', icon: 'dashboard', routerLink: ['/']},
             
             {
-                label: 'Assign Resource', icon: 'person',
+                label: 'Internal Customers', icon: 'person',
                 items: [
-                    {label: 'Users', icon: 'person', routerLink: ['/users']},   
+                    {label: 'Individuals', icon: 'person', routerLink: ['/users']},   
                     {label: 'Teams', icon: 'people', routerLink: ['/teams']},  
                     {label: 'Projects', icon: 'work', routerLink: ['/projects']}                                                   
                 ]
             },       
             {
-                label: 'Create Resource', icon: 'cloud_queue',
+                label: 'Environments', icon: 'cloud_queue',
                 items: [
-                    {label: 'Environments', icon: 'computer', routerLink: ['/environments']}   
+                    {label: 'Manage', icon: 'edit', routerLink: ['/environments']},
+                    {label: 'Build', icon: 'build', routerLink: ['/envinstances']}                         
                 ]
             },                 
 /*

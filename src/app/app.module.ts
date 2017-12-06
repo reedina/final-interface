@@ -109,6 +109,8 @@ import { EnvironmentComponent } from './environments/environment.component';
 import { EnvironmentService } from './environments/environment.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FielderrorsComponent } from './fielderrors/fielderrors.component';
+import { EnvironmentInstancesComponent } from './environment-instances/environment-instances.component';
+import { EnvironmentInstancesService } from './environment-instances/environment-instances.service';
 
 @NgModule({
     imports: [
@@ -211,11 +213,12 @@ import { FielderrorsComponent } from './fielderrors/fielderrors.component';
         ProjectComponent,
         EnvironmentComponent,
         FielderrorsComponent,
+        EnvironmentInstancesComponent,
 
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        CarService, CountryService, EventService, NodeService, TeamService, UserService, ProjectService, EnvironmentService
+        CarService, CountryService, EventService, NodeService, TeamService, UserService, ProjectService, EnvironmentService, EnvironmentInstancesService
     ],
     bootstrap: [AppComponent]
 })
