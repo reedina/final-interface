@@ -16,6 +16,7 @@
       <p-column field="deletion_time" header="Deletion Time" [sortable]="true" ></p-column>
       <p-column field="environment.name" header="Environment Name" [sortable]="true" ></p-column>
       <p-column field="environment.type" header="Environment Type" [sortable]="true" ></p-column>
+      <p-column field="team.name" header="Team Name" [sortable]="true" ></p-column>      
       <p-footer>
           <label for="tableSearch">Search: </label>
           <input id="tableSearch" #tableSearch type="text" placeholder="Search All Fields">
@@ -49,11 +50,17 @@
     </div>
     
 
-    <!-- Select Team -->
+    <!-- Select Environment -->
     <div class="ui-g">
       <label for="EnvironmentID" class="ui-g-12 ui-lg-2">Environment</label>
       <p-dropdown  autoWidth="true"  [style]="{'width': '100%'}" id="EnvironmentID" formControlName="environment" [options]="environmentsDd"  class="ui-g-12 ui-lg-10"></p-dropdown>
     </div>    
+
+     <!-- Select Team -->
+     <div class="ui-g">
+     <label for="TeamID" class="ui-g-12 ui-lg-2">Team</label>
+       <p-dropdown  autoWidth="true"  [style]="{'width': '100%'}" id="TeamID" formControlName="team" [options]="teamsDd"  class="ui-g-12 ui-lg-10"></p-dropdown>
+     </div>  
 
    <!-- Submit/Reset Button -->
    <div>

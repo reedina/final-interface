@@ -9,6 +9,8 @@ import { EnvironmentInstancesService } from './environment-instances.service';
 import { IEnvironmentInstance, EnvironmentInstance} from './environment-instance';
 import { IEnvironment, Environment } from '../environments/environment';
 import { EnvironmentService } from '../environments/environment.service';
+import { TeamService } from '../teams/team.service';
+import { ITeam, Team } from '../teams/team';
 
 
 @Component({
@@ -21,19 +23,21 @@ export class EnvironmentInstancesComponent implements OnInit {
 // var newDate = addDays(new Date(), 5);
   minDeleteDate =  this.addDays(new Date(), 1);
   environmentsDd = [];
+  teamsDd = [];
   msgs: Message[] = [];
   environmentInstanceForm: FormGroup;
   environmentInstance: EnvironmentInstance = new EnvironmentInstance()
   environmentInstances: Array<IEnvironment>;
   environments: Array<IEnvironment>;  
   resp: any;
+  teams: Array<ITeam>;
 
-
-  constructor(private fb: FormBuilder,private environmentInstanceService: EnvironmentInstancesService, private environmentService: EnvironmentService) {
+  constructor(private teamService: TeamService, private fb: FormBuilder,private environmentInstanceService: EnvironmentInstancesService, private environmentService: EnvironmentService) {
     this.environmentInstanceForm = this.fb.group({
       name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       deletion_time:  ['', [Validators.required]],
-      environment: ['', [Validators.required]]
+      environment: ['', [Validators.required]],
+      team: ['', [Validators.required]]
       });
    }
 
@@ -48,6 +52,14 @@ export class EnvironmentInstancesComponent implements OnInit {
       this.environments = res;
       this.createEnvironmentsDropdown();
      });
+
+     this.teamService.getTeams().
+     do(res => console.log(res)).
+     subscribe( res => { this.teams = res;
+    this.createTeamsDropdown();
+    });
+     
+     
   }
 
   createEnvironmentsDropdown() {
@@ -60,6 +72,18 @@ export class EnvironmentInstancesComponent implements OnInit {
         }
     
       }
+
+
+      createTeamsDropdown() {
+        
+            this.teamsDd = [];
+            this.teamsDd.push({label: 'Select Team', value: null});
+             for ( let t  of this.teams)     {
+                   let labelName = t.name;
+                  this.teamsDd.push({label: labelName, value: t});
+            }
+        
+          }      
 
   showError(message: string) {
     this.msgs = [];
