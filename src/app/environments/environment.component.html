@@ -37,7 +37,16 @@
               <at-fielderrors [form]="environmentForm" field="name" nicename="Name"> </at-fielderrors>
            </div>
       </div>
-  
+
+      <!-- Input URL -->
+      <div class="ui-g">
+        <label for="URLID" class="ui-g-12 ui-lg-2">Build URL</label>
+        <input type="text" pInputText id="URLID" formControlName="url" placeholder="http://localhost:8000/api/test"  class="ui-g-12 ui-lg-10">
+        <div  class="ui-g-12" > 
+           <at-fielderrors [form]="environmentForm" field="url" nicename="Build URL"> </at-fielderrors>
+        </div>
+      </div> 
+
       <!-- Select Button -->
       <div class="ui-g">
         <label for="TypeID" class="ui-g-12 ui-lg-2">Type</label>
@@ -46,14 +55,6 @@
         </div>
        </div>
       
-      <!-- Input URL -->
-      <div class="ui-g">
-        <label for="URLID" class="ui-g-12 ui-lg-2">Build URL</label>
-        <input type="text" pInputText id="URLID" formControlName="url" placeholder="http://localhost:8000/api/test"  class="ui-g-12 ui-lg-10">
-        <div  class="ui-g-12" > 
-           <at-fielderrors [form]="environmentForm" field="url" nicename="Build URL"> </at-fielderrors>
-        </div>
-      </div>    
   
      <!-- Submit/Reset Button -->
      <div>

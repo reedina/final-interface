@@ -11,6 +11,8 @@ import { IEnvironment, Environment } from '../environments/environment';
 import { EnvironmentService } from '../environments/environment.service';
 import { TeamService } from '../teams/team.service';
 import { ITeam, Team } from '../teams/team';
+import { ProjectService } from '../projects/project.service';
+import { IProject, Project } from '../projects/project';
 
 
 @Component({
@@ -24,20 +26,24 @@ export class EnvironmentInstancesComponent implements OnInit {
   minDeleteDate =  this.addDays(new Date(), 1);
   environmentsDd = [];
   teamsDd = [];
+  projectsDd = [];
   msgs: Message[] = [];
   environmentInstanceForm: FormGroup;
   environmentInstance: EnvironmentInstance = new EnvironmentInstance()
   environmentInstances: Array<IEnvironment>;
   environments: Array<IEnvironment>;  
   resp: any;
-  teams: Array<ITeam>;
+  teams: Array<ITeam>;  
+  projects: Array<IProject>;
 
-  constructor(private teamService: TeamService, private fb: FormBuilder,private environmentInstanceService: EnvironmentInstancesService, private environmentService: EnvironmentService) {
+  constructor(private projectService: ProjectService, private teamService: TeamService, private fb: FormBuilder,private environmentInstanceService: EnvironmentInstancesService, private environmentService: EnvironmentService) {
     this.environmentInstanceForm = this.fb.group({
       name:  ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       deletion_time:  ['', [Validators.required]],
       environment: ['', [Validators.required]],
-      team: ['', [Validators.required]]
+      team: ['', [Validators.required]],
+      project: ['', [Validators.required]]      
+
       });
    }
 
@@ -59,6 +65,11 @@ export class EnvironmentInstancesComponent implements OnInit {
     this.createTeamsDropdown();
     });
      
+    this.projectService.getProjects().
+    do(res => console.log(res)).
+    subscribe( res => { this.projects = res;
+      this.createProjectsDropdownInitial();
+    });
      
   }
 
@@ -84,6 +95,29 @@ export class EnvironmentInstancesComponent implements OnInit {
             }
         
           }      
+
+          createProjectsDropdown(team) {
+             //console.log("on Chnnage");
+             //console.log(team.value.id);
+             
+                this.projectsDd = [];
+                this.projectsDd.push({label: 'Select Project', value: null});
+                 for ( let t  of this.projects)     {
+                            console.log(t.team.id);
+                       if (team.value.id === t.team.id) {
+                             let labelName = t.name;
+                             this.projectsDd.push({label: labelName, value: t});
+                      }
+                }
+            
+              }  
+              createProjectsDropdownInitial() {
+
+                   this.projectsDd = [];
+                   this.projectsDd.push({label: 'Select Project', value: null});
+                   
+                 }                
+            
 
   showError(message: string) {
     this.msgs = [];
