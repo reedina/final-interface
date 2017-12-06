@@ -48,3 +48,20 @@
     background-color: #00B493;
     color: white;
   }
+  .ui-radiobutton {
+    width:100% !important;
+
+  }
+
+  .radioDiv
+  {
+     width:100%;
+  }
+  .leftRadio
+  {
+     float:left;
+  }
+  .rightRadio
+  {
+     float:right;
+  }

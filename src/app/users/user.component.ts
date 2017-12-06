@@ -16,7 +16,8 @@ import { TeamService } from '../teams/team.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-teamsDd =  [];
+
+  teamsDd =  [];
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   msgs: Message[] = [];
   userForm: FormGroup;
