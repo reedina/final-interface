@@ -17,7 +17,7 @@ result: Array<any>;
   constructor(private http: Http) { }
 
   getTeams() {
-        return this.http.get('http://localhost:4040/api/teams')
+        return this.http.get('/api/teams')
         .map(result => this.result  = result.json())
   }
   
@@ -30,7 +30,7 @@ result: Array<any>;
 
   private createTeam(team: ITeam, options: RequestOptions): Observable<ITeam> {
     console.log(team)
-      return this.http.post("http://localhost:4040/api/team", team, options)
+      return this.http.post("/api/team", team, options)
       .map(this.extractData)
       .do(data => console.log('createProduct: ' + JSON.stringify(data)))
       .catch(this.handleError);

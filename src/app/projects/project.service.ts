@@ -18,7 +18,7 @@ export class ProjectService {
   constructor(private http: Http) { }
 
   getProjects() {
-    return this.http.get('http://localhost:4040/api/projects')
+    return this.http.get('/api/projects')
     .map(result => this.result  = result.json())
 }
 saveProject(project: IProject): Observable<IProject> {
@@ -30,7 +30,7 @@ saveProject(project: IProject): Observable<IProject> {
 
 private createProject(project: IProject, options: RequestOptions): Observable<IProject> {
   console.log(project)
-    return this.http.post("http://localhost:4040/api/project", project, options)
+    return this.http.post("/api/project", project, options)
     .map(this.extractData)
     .do(data => console.log('create project: ' + JSON.stringify(data)))
     .catch(this.handleError);

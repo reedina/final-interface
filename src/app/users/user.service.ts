@@ -18,7 +18,8 @@ export class UserService {
   constructor(private http: Http) { }
 
   getUsers() {
-    return this.http.get('http://localhost:4040/api/users')
+    //return this.http.get('http://localhost:4040/api/users')
+    return this.http.get('/api/users')
     .map(result => this.result  = result.json())
 }
 
@@ -31,7 +32,8 @@ saveUser(user: IUser): Observable<IUser> {
 
 private createUser(user: IUser, options: RequestOptions): Observable<IUser> {
   console.log(user)
-    return this.http.post("http://localhost:4040/api/user", user, options)
+  //return this.http.post("http://localhost:4040/api/user", user, options)
+    return this.http.post("/api/user", user, options)
     .map(this.extractData)
     .do(data => console.log('create User: ' + JSON.stringify(data)))
     .catch(this.handleError);

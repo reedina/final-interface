@@ -18,7 +18,7 @@ export class EnvironmentService {
     constructor(private http: Http) { }
 
     getEnvironments() {
-      return this.http.get('http://localhost:4050/api/environments')
+      return this.http.get('/api/environments')
       .map(result => this.result  = result.json())
 }    
 
@@ -31,7 +31,7 @@ saveEnvironment(environment: IEnvironment): Observable<IEnvironment> {
 
 private createEnvironment(environment: IEnvironment, options: RequestOptions): Observable<IEnvironment> {
   console.log(environment)
-    return this.http.post("http://localhost:4050/api/environment", environment, options)
+    return this.http.post("/api/environment", environment, options)
     .map(this.extractData)
     .do(data => console.log('create Environment: ' + JSON.stringify(data)))
     .catch(this.handleError);
